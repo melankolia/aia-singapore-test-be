@@ -1,5 +1,6 @@
-import { FeedsModel } from './index.d';
+import { FeedsModel, FeedsResponse } from './index.d';
 import axios from "axios";
+import Converter from '../../utils/converter';
 
 class Feeds implements FeedsModel {
     public findAll(tags: string): Promise<any> {
@@ -15,12 +16,21 @@ class Feeds implements FeedsModel {
                 })
                 .then(({ data, status }: any) => {
                     if (status == 200) {
+                        data.modified = Converter.convertDate(data.modified)
+                        data.items.map((e: FeedsResponse) => {
+                            e.description = e
+                                .description.split("</p>", 3)
+                                .map((e: string) => e.replace(" <p>", ""))
+                            e.published = Converter.convertDate(e.published)
+                            e.date_taken = Converter.convertDate(e.date_taken)
+                            e.tags = e.tags ? e.tags.split(" ") : null
+                        })
                         resolve(data)
                     } else {
                         reject(data)
                     }
                 })
-                .catch((e: ErrorEvent) => {
+                .catch((e: any) => {
                     reject(e)
                 });
 

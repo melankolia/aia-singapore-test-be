@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import FeedsService from "../../services/feeds";
-import Responses from "../../Utils/Helper/Response";
+import Responses from "../../utils/helper/Response";
 
 class Feeds {
     feedsService: FeedsService;
@@ -11,14 +11,7 @@ class Feeds {
 
     public async findAll(req: Request, res: Response, next: NextFunction): Promise<any> {
         try {
-            // if (!req.query?.tags) throw "Params Tag Required"
-        } catch (error) {
-            return Responses.badRequest(res, error, next)
-        }
-
-        try {
             const tags = req.query?.tags as string
-            console.log(tags);
             const Result = await this.feedsService.findAll(tags)
 
             Responses.success(res, Result)

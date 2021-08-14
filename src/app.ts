@@ -1,10 +1,10 @@
 import express, { Application, NextFunction, Request, Response } from "express";
+import Router from "./routes";
 import cors from "cors";
 import logger from "morgan";
 import helmet from "helmet";
 import fs from "fs";
 import path from "path";
-import axios from "axios";
 
 
 const app: Application = express();
@@ -25,6 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 
 // Init Cross Server Scripting
 app.use(helmet.xssFilter());
+
+// Init Router
+app.use("/", Router);
 
 app.listen(5000, () => {
     console.log("Server Running Port 5000")

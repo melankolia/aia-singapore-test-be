@@ -14,15 +14,15 @@ class Feeds {
         try {
             const page = Number(req.query?.page || 1) as number
             const limit = Number(req.query?.limit || 10) as number;
+            const sort = req.query?.sort || 'asc' as string;
             const tags = req.query?.tags as string;
 
             const payload = {
                 page,
                 limit,
+                sort,
                 tags
             } as FeedsPayload;
-
-            console.log(payload);
 
             const Result = await this.feedsService.findAll(payload)
 

@@ -1,9 +1,10 @@
 import { FeedsModel, FeedsResponse } from './index.d';
+import { FeedsPayload } from '../../controllers/feeds/index.d';
 import axios from "axios";
 import Converter from '../../utils/converter';
 
 class Feeds implements FeedsModel {
-    public findAll(tags: string): Promise<any> {
+    public findAll(payload: FeedsPayload): Promise<any> {
         return new Promise<any>((resolve, reject) => {
             axios
                 .get("https://www.flickr.com/services/feeds/photos_public.gne", {
@@ -11,7 +12,7 @@ class Feeds implements FeedsModel {
                         format: "json",
                         lang: "en-us",
                         nojsoncallback: 1,
-                        tags
+                        tags: payload.tags,
                     },
                 })
                 .then(({ data, status }: any) => {

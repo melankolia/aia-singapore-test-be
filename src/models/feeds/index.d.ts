@@ -1,5 +1,6 @@
+import { FeedsPayload } from '../../controllers/feeds/index.d';
 export interface FeedsModel {
-    findAll(tags: string): Promise<any>;
+    findAll(payload: FeedsPayload): Promise<any>;
 }
 
 export type FeedsResponse = {

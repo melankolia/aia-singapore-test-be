@@ -1,3 +1,4 @@
+import { FeedsPayload } from "../../controllers/feeds/index.d";
 export interface FeedsService {
-    findAll(tags: string): Promise<any>;
+    findAll(tags: FeedsPayload): Promise<any>;
 }

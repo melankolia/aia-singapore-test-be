@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(helmet.xssFilter());
 
 // Init Router
-app.use("/", Router);
+app.use("/aia-service", Router);
 
 app.listen(80, () => {
     console.log("Server Running Port 5000")

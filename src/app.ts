@@ -29,6 +29,6 @@ app.use(helmet.xssFilter());
 // Init Router
 app.use("/", Router);
 
-app.listen(80, () => {
+app.listen(443, () => {
     console.log("Server Running Port 5000")
 })
